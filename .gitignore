@@ -1,0 +1,25 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Env & local configs
+.env
+.env.*.local
+*.local
+
+# Build artifacts / zips
+dist/
+build/
+deploy.zip
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+vite.config.js
+

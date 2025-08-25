@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+:root {
+  --brand-1: 254 94% 62%;   /* violet-ish */
+  --brand-2: 222 89% 56%;   /* blue-ish */
+  --brand-3: 160 84% 39%;   /* emerald-ish */
+  --surface: 0 0% 100%;
+  --ink: 222 47% 11%;
+}
+
+/* ==== App-level background ==== */
+.app-gradient {
+  @apply min-h-screen bg-gradient-to-br from-indigo-50 via-white to-rose-50;
+}
+
+/* Glassy header background */
+.glass {
+  @apply bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60;
+}
+
+/* ==== Components (Tailwind @apply with utilities only) ==== */
+@layer components {
+  .container-pro {
+    @apply mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply rounded-xl border border-gray-200 bg-white shadow-sm;
+  }
+
+  .card-hover {
+    @apply transition hover:shadow-md hover:-translate-y-[1px];
+  }
+
+  .card-title {
+    @apply text-lg font-semibold tracking-tight text-slate-900;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-gray-300 bg-white px-3 py-2
+           text-slate-900 placeholder:text-gray-400
+           focus:outline-none focus:ring-2 focus:ring-indigo-500;
+  }
+
+  /* Base button (use directly if you want) */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2
+           text-sm font-medium transition focus:outline-none
+           focus:ring-2 focus:ring-offset-2 disabled:opacity-60
+           disabled:cursor-not-allowed;
+  }
+
+  /* Variants (repeat utilities instead of @apply .btn) */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2
+           text-sm font-medium transition focus:outline-none
+           focus:ring-2 focus:ring-offset-2 disabled:opacity-60
+           disabled:cursor-not-allowed
+           text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2
+           text-sm font-medium transition focus:outline-none
+           focus:ring-2 focus:ring-offset-2 disabled:opacity-60
+           disabled:cursor-not-allowed
+           bg-transparent text-slate-700 hover:bg-slate-100 focus:ring-slate-400;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2
+           text-sm font-medium transition focus:outline-none
+           focus:ring-2 focus:ring-offset-2 disabled:opacity-60
+           disabled:cursor-not-allowed
+           text-white bg-rose-600 hover:bg-rose-700 focus:ring-rose-500;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-gray-200
+           bg-white px-3 py-1 text-sm text-slate-600;
+  }
+
+  .empty-state {
+    @apply mt-4 rounded-xl border-2 border-dashed border-indigo-200
+           bg-indigo-50/60 p-8 text-center text-slate-600;
+  }
+}
+
+
+
+
+
+/* ============================
+   Amplify Authenticator Styling
+   ============================ */
+@layer components {
+  /* The outer authenticator wrapper */
+  [data-amplify-authenticator] {
+    /* Inlined utilities instead of @apply container-pro */
+    @apply mx-auto my-10 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm;
+    backdrop-filter: saturate(180%) blur(2px);
+  }
+
+  [data-amplify-authenticator] h1,
+  [data-amplify-authenticator] h2,
+  [data-amplify-authenticator] h3 {
+    @apply text-slate-900 font-semibold tracking-tight;
+  }
+
+  [data-amplify-authenticator] form { @apply space-y-4; }
+
+  [data-amplify-authenticator] label { @apply text-sm font-medium text-slate-700; }
+
+  [data-amplify-authenticator] small,
+  [data-amplify-authenticator] .amplify-visually-hidden + span {
+    @apply text-xs text-slate-500;
+  }
+
+  [data-amplify-authenticator] input[type="email"],
+  [data-amplify-authenticator] input[type="password"],
+  [data-amplify-authenticator] input[type="text"],
+  [data-amplify-authenticator] input[type="tel"],
+  [data-amplify-authenticator] input[type="number"] {
+    @apply w-full rounded-lg border border-gray-300 bg-white px-3 py-2
+           text-slate-900 placeholder:text-gray-400
+           focus:outline-none focus:ring-2 focus:ring-indigo-500;
+  }
+
+  [data-amplify-authenticator] button[type="submit"] {
+    @apply inline-flex w-full items-center justify-center rounded-lg
+           px-4 py-2 text-sm font-medium text-white
+           bg-indigo-600 hover:bg-indigo-700
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+  }
+
+  [data-amplify-authenticator] button:not([type="submit"]) {
+    @apply inline-flex w-full items-center justify-center rounded-lg
+           px-4 py-2 text-sm font-medium
+           bg-transparent text-slate-700 hover:bg-slate-100
+           focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2;
+  }
+
+  [data-amplify-authenticator] a {
+    @apply text-indigo-600 hover:text-indigo-700 hover:underline;
+  }
+
+  [data-amplify-authenticator] .amplify-alert,
+  [data-amplify-authenticator] [role="alert"] {
+    @apply rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-rose-700;
+  }
+
+  [data-amplify-authenticator] hr { @apply my-4 border-gray-200; }
+
+  [data-amplify-authenticator]::before {
+    content: "";
+    @apply mx-auto mb-4 block h-1.5 w-20 rounded-full bg-gradient-to-r from-indigo-500 to-rose-500;
+  }
+}
+
+/* Center the authenticator nicely when signed out */
+body:has([data-amplify-authenticator]) .app-gradient {
+  @apply flex items-center justify-center;
+}
